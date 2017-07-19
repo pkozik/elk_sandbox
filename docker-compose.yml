@@ -1,0 +1,37 @@
+elasticsearch:
+  container_name: pkozik_elastic
+  image: elasticsearch:latest
+  command: elasticsearch 
+  environment:
+    - cluster.name=sandbox
+  volumes:
+    - ./elasticsearch/data:/usr/share/elasticsearch/data
+  ports:
+    - 9200:9200
+
+
+logstash:
+  container_name: pkozik_logstash
+  image: logstash:latest
+  command: logstash -f /etc/logstash/conf.d
+  volumes:
+    - ./logstash/config:/etc/logstash/conf.d
+  ports:
+    - 4560:4560   # for tcp
+    - 4580:4580   # for http
+  links:
+    - elasticsearch
+
+
+kibana:
+  container_name: pkozik_kibana
+  image: kibana:latest
+  command: kibana
+  environment:
+    SERVER_NAME: "pkozik_kibana"
+    ELASTICSEARCH_URL: http://elasticsearch:9200
+  ports:
+    - 5601:5601
+  links:
+    - elasticsearch
+

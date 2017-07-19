@@ -1,0 +1,58 @@
+{
+  "template": "logs-*",
+  "mappings": {
+    "log": {
+      "properties": {
+        "@timestamp": {
+          "type":"date",
+          "format": "strict_date_optional_time||epoch_millis"
+        },
+        "application": {
+          "type": "keyword"
+        },
+        "type": {
+          "type": "keyword"
+        },
+        "program": {
+          "type": "keyword"
+        },
+        "host": {
+          "type": "keyword"
+        },
+        "loglevel": {
+          "type": "keyword"
+        },
+        "logger": {
+          "type": "keyword"
+        },
+        "operation": {
+          "type": "keyword"
+        },
+        "priority": {
+          "type": "keyword"
+        },
+        "tid": {
+          "type": "keyword"
+        },
+        "user": {
+          "type": "keyword"
+        },
+        "http_method": {
+          "type": "keyword"
+        },
+        "status_code": {
+          "type": "integer",
+          "ignore_malformed": true
+        },
+        "return_code": {
+          "type": "integer",
+          "ignore_malformed": true
+        },
+        "elapsed_ms": {
+          "type": "long",
+          "ignore_malformed": true
+        }
+      }
+    }
+  }
+}
