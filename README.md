@@ -4,16 +4,13 @@
 To start environment & run it in background execute: 
 ----------------------------------------------------
 
-. code_block: bash
-
    docker-compose up -d
    
    
 To check status and available ports execute:
 --------------------------------------------
 
-. code_block: bash
-   docker-compose ps
+	docker-compose ps
  
  
 Output:
@@ -31,9 +28,8 @@ Output:
 To check the logs: 
 ------------------
 
-. code_block: bash
  
-    docker-compose logs [elastic|logstash|kibana]
+	docker-compose logs [elastic|logstash|kibana]
 
 	
 Kibana GUI 
@@ -45,8 +41,35 @@ Access on the IP addres of the docker host with 5601 ports
 To stop environment execute:
 ----------------------------
     
-. code_block: bash
+	docker-compose stop
+   
+   
 
-   docker-compose stop
-   
-   
+How to send logs to logstash?
+-----------------------------
+
+Logstash has 2 ports opened for incomming logs:
+* 4560 - for raw, plain-text TCP input
+* 4580 - for HTTP, plain-text input
+
+To send TCP:
+	
+	echo '<log message>' | nc localhost 4560
+
+
+To send HTTP:
+
+	curl -XPOST localhost:4580 -d'<log message>'
+
+
+How to check my logs in elasticsearch
+-------------------------------------
+
+Get name of the index:
+
+	curl -XGET localhost:9200/_cat/indices
+	
+Once you know the name of your index:
+
+	curl localhost:9200/<index name>-*/_search?pretty
+	
