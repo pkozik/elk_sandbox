@@ -4,7 +4,7 @@
 To start environment & run it in background execute: 
 ----------------------------------------------------
 
-   docker-compose up -d
+	docker-compose up -d
    
    
 To check status and available ports execute:
